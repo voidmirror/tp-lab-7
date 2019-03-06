@@ -12,12 +12,12 @@
 
 В системе рассматриваются сущности:
 
-**Ocean** - двумерная матрица ячеек.
-**Cell** - ячейка океана, которая может быть либо пустой, либо содержать объект.
-**Object** - объект, который может занимать ячейку океана.
-**Stone** - неподвижный объект океана, просто занимающий ячейку.
-**Prey** - рыба-жертва. Передвигается случайным образом по океану, размножается и умирает через заданные промежутки времени.
-**Predator** - рыба-хищник. Передвигается по океану, поедает рыбу-жертву, размножается. Может умереть от голода.
+- **Ocean** - двумерная матрица ячеек.
+- **Cell** - ячейка океана, которая может быть либо пустой, либо содержать объект.
+- **Object** - объект, который может занимать ячейку океана.
+- **Stone** - неподвижный объект океана, просто занимающий ячейку.
+- **Prey** - рыба-жертва. Передвигается случайным образом по океану, размножается и умирает через заданные промежутки времени.
+- **Predator** - рыба-хищник. Передвигается по океану, поедает рыбу-жертву, размножается. Может умереть от голода.
 
 
 ### Консольная версия
@@ -28,8 +28,117 @@
 
 На приведенном скриншоте показана i-ая итерация океана. Жерты обозначены символом 'f', хищники - 'S'. Видно, что количество жертв существенно больше числа хищников, что создает для последних благоприятные условия для питания и размножения. На экране отображается порядка 5000 объектов.
 
+### Некоторые варианты реализации
 
+Приведем в качестве примера несколько неполных реализаций классов проекта.
 
+Океан:
+
+```
+#ifndef _OCEAN_H_
+#define _OCEAN_H_
+
+#include "common.h"
+#include "Cell.h"
+#include <list>
+
+class Ocean
+{
+	
+private:
+	Cell **cells;
+	std::list<Object*> stuff;
+
+public:
+	Ocean();
+	~Ocean();
+	void print() const;
+	void addObjects(...);
+	void run();
+};
+#endif
+```
+
+Объект:
+
+```
+#ifndef _OBJECT_H_
+#define _OBJECT_H_
+
+#include "common.h"
+
+#define STONE_N '#'
+#define CORAL_N '*'
+#define PREY_N 'f'
+#define PREDATOR_N 'S'
+
+enum class ObjType {STONE,CORAL,PREY,PREDATOR};
+
+class Cell;
+class Object
+{
+protected:
+	Cell *cell;
+public:
+	Object(Cell * = nullptr);
+	virtual ~Object();
+	virtual void live() = 0; // жизнь объекта
+	void setCell(Cell*);
+};
+#endif
+```
+
+Ячейка:
+
+```
+#ifndef _CELL_H_
+#define _CELL_H_
+
+#include "common.h"
+#include "Object.h"
+
+class Ocean;
+
+class Cell
+{
+	friend Ocean;
+private:
+	Pair crd;
+	Object *obj;
+	Ocean *ocean;
+public:
+	explicit Cell(Pair p = { 0, 0 }, Ocean* oc = nullptr) :
+		crd(p),
+		obj(nullptr),
+		ocean(oc) {}
+	void init(Pair p, Ocean* oc);
+	Object* getObject() const;
+	void setObject(Object*);
+	void killMe();
+
+};
+#endif
+```
+
+Файл с общими настройками:
+
+```
+#ifndef _COMMON_H_
+#define _COMMON_H_
+
+typedef size_t coord_t;
+
+struct Pair
+{
+	coord_t x; // 0..M-1
+	coord_t y; // 0..N-1
+};
+
+const size_t N = 20;
+const size_t M = 50;
+
+#endif
+```
 
  
 ## Список участников/веток
