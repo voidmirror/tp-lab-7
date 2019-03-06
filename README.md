@@ -34,7 +34,7 @@
 
 Океан:
 
-```
+```c++
 #ifndef _OCEAN_H_
 #define _OCEAN_H_
 
@@ -61,7 +61,7 @@ public:
 
 Объект:
 
-```
+```c++
 #ifndef _OBJECT_H_
 #define _OBJECT_H_
 
@@ -90,7 +90,7 @@ public:
 
 Ячейка:
 
-```
+```c++
 #ifndef _CELL_H_
 #define _CELL_H_
 
@@ -122,7 +122,7 @@ public:
 
 Файл с общими настройками:
 
-```
+```c++
 #ifndef _COMMON_H_
 #define _COMMON_H_
 
