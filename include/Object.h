@@ -18,8 +18,8 @@ class Object {
 
 protected:
     char obj_type{};
-    int type_id{};
     Cell *cell{};
+    int type_id{};
 
 public:
     virtual ~Object();
@@ -27,6 +27,8 @@ public:
 public:
     void setCell(Cell *cell);
     char getObjType() const;
+    int getTypeId() const;
+
     virtual void init() = 0;
     virtual void update() = 0;
     virtual void kill() = 0;

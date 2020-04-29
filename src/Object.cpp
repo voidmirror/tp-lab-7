@@ -22,3 +22,7 @@ char Object::getObjType() const {
 Cell *Object::getCell() const {
     return cell;
 }
+
+int Object::getTypeId() const {
+    return type_id;
+}

@@ -12,6 +12,7 @@ public:
     virtual void moveLeft() = 0;
     virtual void moveRight() = 0;
     virtual void makeStep() = 0;
+    virtual void move(int step, int axis) = 0;
 };
 
 #endif //OCEAN_IMOVABLE_H

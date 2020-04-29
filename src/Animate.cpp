@@ -12,9 +12,13 @@ using namespace std;
 Animate::~Animate()= default;
 
 Fish::Fish(){
+    lifeTime = 10;
+    breedingSeason = 3;
     obj_type = FISH_N;
     type_id = FISH;
- }
+    maxDescendants = getRandom(3, 5);
+
+}
 
 void Fish::init() {
 
@@ -52,78 +56,53 @@ void Fish::makeStep() {
     }
 }
 
-
-void Fish::moveUp() {
-
-   // cout << "before " << cell->getCoords().x << ' ' << cell->getCoords().y << endl;
-
-    int y_step = cell->getCoords().y - 1;
-    if (y_step < HEIGHT && y_step >= 0){
-        auto cellDist = &cell->getOcean()->getCells()[y_step][cell->getCoords().x];
+void Fish::move(int stepDir, int axis) {
+    Cell *cellDist = nullptr;
+    if (stepDir < axis && stepDir >= 0){
+        if (axis == HEIGHT){
+            cellDist = &cell->getOcean()->getCells()[stepDir][cell->getCoords().x];
+        } else {
+            cellDist = &cell->getOcean()->getCells()[cell->getCoords().y][stepDir];
+        }
         if(!cellDist->getObject()){
             cellDist->setObject(this);
             cell->setObject(nullptr);
             setCell(cellDist);
         }
     }
+}
 
-  //  cout << "after " << cell->getCoords().x << ' ' << cell->getCoords().y << endl;
-
+void Fish::moveUp() {
+    int y_step = cell->getCoords().y - 1;
+    move(y_step, HEIGHT);
 }
 
 void Fish::moveDown() {
     int y_step = cell->getCoords().y + 1;
-    if (y_step < HEIGHT && y_step >= 0){
-        auto cellDist = &cell->getOcean()->getCells()[y_step][cell->getCoords().x];
-        if (!cellDist->getObject()){
-            cellDist->setObject(this);
-            cell->setObject(nullptr);
-            setCell(cellDist);
-        }
-    }
+    move(y_step, HEIGHT);
 }
 
 void Fish::moveLeft() {
     int x_step = cell->getCoords().x - 1;
-    if (x_step < WIDTH && x_step >= 0) {
-        auto cellDist = &cell->getOcean()->getCells()[cell->getCoords().y][x_step];
-        if (!cellDist->getObject()) {
-            cellDist->setObject(this);
-            cell->setObject(nullptr);
-            setCell(cellDist);
-
-        }
-    }
-
+    move(x_step, WIDTH);
 }
 
 void Fish::moveRight() {
     int x_step = cell->getCoords().x + 1;
-    if (x_step < WIDTH && x_step >= 0) {
-        auto cellDist = &cell->getOcean()->getCells()[cell->getCoords().y][x_step];
-        if (!cellDist->getObject()){
-            cellDist->setObject(this);
-            cell->setObject(nullptr);
-            setCell(cellDist);
-
-        }
-    }
+    move(x_step, WIDTH);
 }
 
 void Fish::breed() {
-    Cell *new_cell = cell->checkAround();
-    if (new_cell) {
-        Object *fish = cell->getOcean()->getCreator(type_id)->createObject();
-        cell->getOcean()->addNew(fish);
-        new_cell->setObject(fish);
-        fish->setCell(new_cell);
+    Cell *new_cell;
+    for (int i = 0; i < maxDescendants; ++i) {
+        new_cell = cell->checkAround();
+        if (new_cell) {
+            Object *fish = cell->getOcean()->getCreator(type_id)->createObject();
+            releaseToOcean(fish);
+            new_cell->setObject(fish);
+            fish->setCell(new_cell);
+        }
     }
-}
-
-void Fish::kill() {
-    cell->getOcean()->addDead(this);
-    cell->setObject(nullptr);
-    setCell(nullptr);
 }
 
 void Fish::update() {
@@ -132,8 +111,11 @@ void Fish::update() {
 }
 
 PredatorFish::PredatorFish(){
+    lifeTime = 15;
+    breedingSeason = 5;
     obj_type = PFISH_N;
     type_id = PFISH;
+    maxDescendants = getRandom(1, 3);
 }
 
 void PredatorFish::init() {
@@ -172,10 +154,6 @@ void PredatorFish::breed() {
     }
 }
 
-void PredatorFish::kill() {
-    Fish::kill();
-}
-
 void PredatorFish::update() {
     Fish::update();
     satietyLevel -= 1;
@@ -185,4 +163,17 @@ void PredatorFish::makeStep() {
     if (!hunt()){
         Fish::makeStep();
     }
+}
+
+void Animate::releaseToOcean(Object * object) {
+    cell->getOcean()->addNew(object);
+    cell->getOcean()->getPopulation()[object->getTypeId()] += 1;
+}
+
+void Animate::kill() {
+    cell->getOcean()->getPopulation()[this->getTypeId()] -= 1;
+    cell->getOcean()->addDead(this);
+    cell->setObject(nullptr);
+    setCell(nullptr);
+
 }

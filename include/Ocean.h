@@ -5,22 +5,27 @@
 #ifndef OCEAN_OCEAN_H
 #define OCEAN_OCEAN_H
 
-#include "config.h"
-#include "Cell.h"
-#include "ObjectCreator.h"
 #include <vector>
 #include <map>
 #include <string>
 
+#include "config.h"
+#include "Cell.h"
+#include "ObjectCreator.h"
+
 using namespace std;
 
 class Ocean {
+
+    friend class Animate;
+
 
 private:
     Cell **cells;
     vector<Object* > objects;
     vector<Object* > deadObj;
     vector<Object* > newObj;
+    map<int, int> population;
 
 private:
     map<int, ObjectCreator *> creators;
@@ -30,19 +35,23 @@ private:
     void fillMap();
     void printMap();
     void addCreator(int type, ObjectCreator *creator);
-
-public:
-    void init();
-    void removeObj(Object *object);
     void flushOld();
     void flushNew();
+
+private:
+    void removeObj(Object *object);
     void addDead(Object *object);
     void addNew(Object *object);
 
-    ObjectCreator *getCreator(int type_id);
 
 public:
+    void init();
+
+public:
+    ObjectCreator *getCreator(int type_id);
     Cell **getCells() const;
+
+    map<int, int> & getPopulation() ;
 };
 
 

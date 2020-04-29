@@ -10,9 +10,10 @@ struct Pair{
     int y;
 };
 
-const unsigned int WIDTH = 100;
-const unsigned int HEIGHT = 10;
-const unsigned int OBJECTS_NUM = 500;
+const unsigned int WIDTH = 150;
+const unsigned int HEIGHT = 30;
+const unsigned int OBJECTS_NUM = 1500;
+const unsigned int MAX_ITER = 100;
 
 
 #endif //OCEAN_CONFIG_H

@@ -28,25 +28,15 @@ void Ocean::makeGrid() {
 void Ocean::fillMap() {
     int x, y;
     for (int i = 0; i < OBJECTS_NUM; ++i) {
-        Object * object = creators[getRandom(1, creators.size())]->createObject();
+        int objId = getRandom(1, creators.size());
+        Object * object = creators[objId]->createObject();
         objects.push_back(object);
         x = getRandom(0, WIDTH - 1);
         y = getRandom(0, HEIGHT - 1);
         cells[y][x].setObject(object);
         object->setCell(&cells[y][x]);
+        population[objId] += 1;
     }
-    /*Object * object = creators[1]->createObject();
-    objects.push_back(object);
-    x = getRandom(0, WIDTH - 1);
-    y = getRandom(0, HEIGHT - 1);
-    cells[0][0].setObject(object);
-    object->setCell(&cells[0][0]);
-    object = creators[2]->createObject();
-    objects.push_back(object);
-    x = getRandom(0, WIDTH - 1);
-    y = getRandom(0, HEIGHT - 1);
-    cells[0][1].setObject(object);
-    object->setCell(&cells[0][1]);*/
 }
 
 void Ocean::printMap() {
@@ -61,6 +51,10 @@ void Ocean::printMap() {
         }
         cout << endl;
     }
+
+    cout << "fish: " << population[1] << endl;
+    cout << "pfish: " << population[2] << endl;
+
     this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 
@@ -74,16 +68,9 @@ void Ocean::init() {
     fillMap();
     printMap();
 
-    /*for (int i=0; i < 5; ++i){
-        printMap();
-        cout << endl;
-        for (auto obj: objects) {
-            obj->init();
-        }
-    }*/
-
     auto rng = std::default_random_engine {};
-    while (!objects.empty()){
+    int iteration = 0;
+    while (population[FISH] > 0 && population[PFISH] > 0 && iteration < MAX_ITER){
         std::shuffle(std::begin(objects), std::end(objects), rng);
         for (auto obj: objects) {
             if (obj->getCell()){
@@ -95,6 +82,8 @@ void Ocean::init() {
         flushNew();
         flushOld();
         printMap();
+
+        iteration++;
     }
 }
 
@@ -110,7 +99,6 @@ void Ocean::removeObj(Object *object) {
     objects.erase(std::remove(objects.begin(), objects.end(), object), objects.end());
 }
 
-
 void Ocean::flushOld() {
     for (auto obj : deadObj){
         removeObj(obj);
@@ -122,10 +110,6 @@ void Ocean::flushOld() {
     deadObj.clear();
 }
 
-void Ocean::addDead(Object *object) {
-    deadObj.push_back(object);
-}
-
 void Ocean::flushNew() {
     if (!newObj.empty()){
         objects.reserve(objects.size() + newObj.size());
@@ -135,11 +119,19 @@ void Ocean::flushNew() {
 
 }
 
+void Ocean::addDead(Object *object) {
+    deadObj.push_back(object);
+}
+
 void Ocean::addNew(Object *object) {
     newObj.push_back(object);
 }
 
 ObjectCreator *Ocean::getCreator(int type_id) {
     return creators[type_id];
+}
+
+map<int, int> &Ocean::getPopulation() {
+    return population;
 }
 

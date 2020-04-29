@@ -32,7 +32,11 @@ set(SRC_FILES
         src/Animate.cpp include/Animate.h
         src/Inanimate.cpp include/Inanimate.h
         src/ObjectCreator.cpp include/ObjectCreator.h
-        include/config.h include/IMovable.h include/IPredatory.h src/helper.cpp include/helper.h)
+        src/helper.cpp include/helper.h
+        include/config.h
+        include/IMovable.h
+        include/IPredatory.h
+        )
 
 set(CMAKE_CXX_STANDARD 11)
 
@@ -40,6 +44,11 @@ add_library(ocean_lib ${SRC_FILES})
 add_executable(ocean_run ${PROJECT_SOURCE_DIR}/src/main.cpp)
 
 target_link_libraries(ocean_run ocean_lib)
+
+add_executable(runUnitTests test/tests.cpp)
+
+target_link_libraries(runUnitTests gtest gtest_main)
+target_link_libraries(runUnitTests ocean_lib)
 
 ################################
 # Testing
@@ -50,8 +59,6 @@ option(BUILD_TESTS "Build all tests." OFF) # Makes boolean 'test' available.
 
 if (BUILD_TESTS)
   # This adds another subdirectory, which has 'project(gtest)'.
-  add_subdirectory(ext/gtest-1.8.0)
-
   enable_testing()
 
   # Include the gtest library. gtest_SOURCE_DIR is available due to
@@ -61,13 +68,6 @@ if (BUILD_TESTS)
   ##############
   # Unit Tests
   ##############
-  add_executable(runUnitTests ${TEST_SRC_FILES})
-
-  # Standard linking to gtest stuff.
-  target_link_libraries(runUnitTests gtest gtest_main)
-
-  # Extra linking for the project.
-  target_link_libraries(runUnitTests ocean_lib)
 
   # This is so you can do 'make test' to see all your tests run, instead of
   # manually running the executable runUnitTests to see those specific tests.

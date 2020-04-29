@@ -13,11 +13,14 @@ enum Direction {UP, DOWN, LEFT, RIGHT};
 
 class Animate: public Object {
 protected:
-    int lifeTime{7};
-    int breedingSeason{3};
+    int lifeTime;
+    int breedingSeason;
+    int maxDescendants;
 
 protected:
     virtual void breed() = 0;
+    virtual void releaseToOcean(Object *object) final;
+    virtual void kill() final ;
 
 protected:
     ~Animate() override;
@@ -29,11 +32,11 @@ protected:
 
 protected:
     void breed() override;
-    void kill() override;
     void moveUp() override;
     void moveDown() override;
     void moveLeft() override;
     void moveRight() override;
+    void move(int, int) override;
     void makeStep() override;
     void update() override;
 
@@ -49,7 +52,6 @@ protected:
     int satietyLevel{NORMAL};
 protected:
     void breed() override;
-    void kill() override;
     bool hunt() override;
     void update() override;
     void makeStep() override;
