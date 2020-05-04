@@ -18,15 +18,13 @@ include_directories(${COMMON_INCLUDES})
 file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
 
 
-set(SRC_FILES ${PROJECT_SOURCE_DIR}/src/ocean.cpp
-              ${PROJECT_SOURCE_DIR}/src/stone.cpp
-              ${PROJECT_SOURCE_DIR}/src/prey.cpp
-              ${PROJECT_SOURCE_DIR}/src/predator.cpp)
+set(SRC_FILES ${PROJECT_SOURCE_DIR}/src/Ocean.cpp
+              ${PROJECT_SOURCE_DIR}/src/Objects.cpp)
 
 set(CMAKE_CXX_STANDARD 11)
 
 add_library(task1_lib ${SRC_FILES})
-add_executable(task1 ${PROJECT_SOURCE_DIR}/src/main.cpp)
+add_executable(task1 ${PROJECT_SOURCE_DIR}/src/Main.cpp)
 
 target_link_libraries(task1 task1_lib)
 
@@ -35,32 +33,32 @@ target_link_libraries(task1 task1_lib)
 ################################
 
 # Options. Turn on with 'cmake -Dmyvarname=ON'.
-option(BUILD_TESTS "Build all tests." OFF) # Makes boolean 'test' available.
+#option(BUILD_TESTS "Build all tests." OFF) # Makes boolean 'test' available.
 
-if (BUILD_TESTS)
+#if (BUILD_TESTS)
   # This adds another subdirectory, which has 'project(gtest)'.
-  add_subdirectory(ext/gtest-1.8.0)
+#  add_subdirectory(ext/gtest-1.8.0)
 
-  enable_testing()
+#  enable_testing()
 
   # Include the gtest library. gtest_SOURCE_DIR is available due to
   # 'project(gtest)' above.
-  include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+#  include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
   ##############
   # Unit Tests
   ##############
-  add_executable(runUnitTests ${TEST_SRC_FILES})
+#  add_executable(runUnitTests ${TEST_SRC_FILES})
 
   # Standard linking to gtest stuff.
-  target_link_libraries(runUnitTests gtest gtest_main)
+#  target_link_libraries(runUnitTests gtest gtest_main)
 
   # Extra linking for the project.
-  target_link_libraries(runUnitTests task1_lib)
+#  target_link_libraries(runUnitTests task1_lib)
 
   # This is so you can do 'make test' to see all your tests run, instead of
   # manually running the executable runUnitTests to see those specific tests.
-  add_test(UnitTests runUnitTests)
+#  add_test(UnitTests runUnitTests)
 
   set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/.travis/cmake)
 
