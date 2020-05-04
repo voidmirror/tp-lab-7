@@ -9,8 +9,9 @@ using namespace std;
 
 int main(){
 	cout << "Ocean started!!!" << endl;
-	srand(time(NULL));
-	Ocean ocean;
-    ocean.fillOcean(20);
-	ocean.run();
+	srand(time(NULL)); // refresh randomizer
+	Ocean ocean; // create ocean
+        ocean.fillOcean(71); // scale (approximately sqrt from 5000 elements)
+	ocean.run(); // start loop
+	cout << "Stop" << endl;
 }
