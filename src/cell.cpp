@@ -9,8 +9,10 @@
 Cell::Cell(pair<int, int> _position, Ocean *_ocean) : position(std::move(_position)), ocean(_ocean) {}
 
 void Cell::deleteObj() {
-    delete object;
-    object = nullptr;
+    if(object) {
+        delete object;
+        object = nullptr;
+    }
 }
 
 Object *Cell::getObject() {
@@ -37,6 +39,10 @@ vector<pair<int,int> > Cell::getNeighbours() {
         neighbours.emplace_back(x, y);
     }
     return neighbours;
+}
+
+Cell::~Cell() {
+    deleteObj();
 };
 
 

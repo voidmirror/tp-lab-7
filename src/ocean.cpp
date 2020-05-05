@@ -158,3 +158,12 @@ Ocean::Ocean(int _n, int _m) : n(_n), m(_m) {
         used[i].resize(m, false);
     }
 }
+
+Ocean::~Ocean() {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            delete cells[i][j];
+        }
+    }
+    stuff.clear();
+}
