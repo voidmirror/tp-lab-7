@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
 # Make PROJECT_SOURCE_DIR, PROJECT_BINARY_DIR, and PROJECT_NAME available.
-set(PROJECT_NAME task1) 
+set(PROJECT_NAME lab7)
 project(${PROJECT_NAME})
 
 set(CMAKE_CXX_FLAGS "-g -Wall")
@@ -19,6 +19,8 @@ file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
 
 
 set(SRC_FILES ${PROJECT_SOURCE_DIR}/src/ocean.cpp
+              ${PROJECT_SOURCE_DIR}/src/cell.cpp
+              ${PROJECT_SOURCE_DIR}/src/object.cpp
               ${PROJECT_SOURCE_DIR}/src/stone.cpp
               ${PROJECT_SOURCE_DIR}/src/prey.cpp
               ${PROJECT_SOURCE_DIR}/src/predator.cpp)
