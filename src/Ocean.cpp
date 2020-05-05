@@ -35,7 +35,7 @@ int* Ocean::print() const {
     for (int i = 0; i < X; i++) {
         for (int j = 0; j < Y; j++)  {
             if (cells[i][j].getObject() != nullptr) {
-                ObjType stuff = cells[i][j].getObject()->getType();
+                auto stuff = cells[i][j].getObject()->getChar();
                 switch (stuff) {
                     case 'S':
                         predators++;
@@ -57,6 +57,16 @@ int* Ocean::print() const {
         }
         cout << endl;
     }
+    static int results[2];
+
+    cout << "Preys: " << preys << endl;
+    cout << "Predators: " << predators << endl;
+    cout << "Stone: " << stones << endl;
+
+    results[0] = preys;
+    results[1] = predators;
+
+    return results;
 }
 
 void Ocean::addObj(ObjType type, unsigned int value) {

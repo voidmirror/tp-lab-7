@@ -1,11 +1,3 @@
-//
-//  Defaults.h
-//  Ocean
-//
-//  Created by Олеся Мартынюк on 05.05.2020.
-//  Copyright © 2020 Olesia Martinyuk. All rights reserved.
-//
-
 #ifndef Defaults_h
 #define Defaults_h
 
