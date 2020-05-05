@@ -1,5 +1,5 @@
 #include "Cell.hpp"
-#include "Ocean.cpp"
+#include "Ocean.hpp"
 #include "Defaults.h"
 
 void Cell::init(Coord coord, Ocean *ocean) {

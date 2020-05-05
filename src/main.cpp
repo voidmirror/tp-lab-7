@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Ocean.cpp"
+#include "Ocean.hpp"
 
 int main(int argc, const char * argv[]) {
     Ocean ocean = Ocean();
