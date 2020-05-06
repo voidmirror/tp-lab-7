@@ -5,43 +5,35 @@ Cell::Cell() {
     object = nullptr;
 }
 
-Cell::Cell(coord location) {
+Cell::Cell(Coordinates location) {
     this->location = location;
     object = nullptr;
-}
-
-void Cell::setObject(Object *object) {
-    this->object = object;
-}
-
-Object *Cell::getObject() {
-    return object;
 }
 
 bool Cell::isEmpty() {
     return object == nullptr;
 }
 
-void Cell::printSymbol() {
+void Cell::printView() {
     if (isEmpty()) {
-        std::cout << symbol;
+        std::cout << character;
     } else {
-        std::cout << object->getSymbol();
+        std::cout << object->getCharacter();
     }
 }
 
-char Cell::getSymbol() {
-    if (isEmpty()) {
-        return symbol;
-    } else {
-        return object->getSymbol();
-    }
-}
-
-coord *Cell::getLocation() {
+Coordinates *Cell::getLocation() {
     return &location;
 }
 
-void Cell::setLocation(coord location) {
+void Cell::setLocation(Coordinates location) {
     this->location = location;
+}
+
+Object *Cell::getObject() {
+    return object;
+}
+
+void Cell::setObject(Object *object) {
+    this->object = object;
 }

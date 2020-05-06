@@ -8,11 +8,11 @@ Object::Object(int x, int y, Ocean* ocean) {
     this->ocean = ocean;
 }
 
-Object::Object(coord coordinates, Ocean * ocean) {
+Object::Object(Coordinates coordinates, Ocean * ocean) {
     location = coordinates;
     this->ocean = ocean;
 }
 
-char Object::getSymbol() {
-    return symbol;
+char Object::getCharacter() {
+    return character;
 }

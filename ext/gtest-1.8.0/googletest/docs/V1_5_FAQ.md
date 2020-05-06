@@ -835,9 +835,9 @@ You may get a number of the following linker error or warnings if you
 attempt to link your test project with the Google Test library when
 your project and the are not built using the same compiler settings.
 
-  * LNK2005: symbol already defined in object
-  * LNK4217: locally defined symbol 'symbol' imported in function 'function'
-  * LNK4049: locally defined symbol 'symbol' imported
+  * LNK2005: character already defined in object
+  * LNK4217: locally defined character 'character' imported in function 'function'
+  * LNK4049: locally defined character 'character' imported
 
 The Google Test project (gtest.vcproj) has the Runtime Library option
 set to /MT (use multi-threaded static libraries, /MTd for debug). If

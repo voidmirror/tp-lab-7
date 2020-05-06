@@ -15,11 +15,11 @@ protected:
     virtual bool checkCell(Cell* cellTo) = 0;
     std::vector<Cell*> getNeighbouredCells();
 public:
-    LivingObject(int x, int y,  Ocean* ocean);
-    LivingObject(coord coordinates, Ocean* ocean);
     virtual void live() = 0;
     virtual void eat(Cell* cell) = 0;
-    void die();
-    virtual void multiply() = 0;
     void birth();
+    void die();
+    virtual void reproduct() = 0;
+    LivingObject(int x, int y,  Ocean* ocean);
+    LivingObject(Coordinates coordinates, Ocean* ocean);
 };

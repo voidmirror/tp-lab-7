@@ -4,7 +4,7 @@
 
 LivingObject::LivingObject(int x, int y,  Ocean* ocean) : Object(x, y, ocean) {}
 
-LivingObject::LivingObject(coord coordinates, Ocean* ocean) : Object(coordinates, ocean) {}
+LivingObject::LivingObject(Coordinates coordinates, Ocean* ocean) : Object(coordinates, ocean) {}
 
 void LivingObject::move(int x, int y) {
     ocean->getCell(&location)->setObject(nullptr);
@@ -58,30 +58,26 @@ void LivingObject::birth() {
 }
 
 std::vector<Cell*> LivingObject::getNeighbouredCells() {
-    std::vector<Cell*> neighbors;
-    //upwards
+    std::vector<Cell*> neighbours;
     for (int i = -1, j = -1; i < 2; i++) {
         Cell* cellTo = ocean->getCell(location.x + i, location.y + j);
         if (cellTo) {
-            neighbors.push_back(cellTo);
+            neighbours.push_back(cellTo);
         }
     }
-    //downwards
     for (int i = -1, j = 1; i < 2; i++) {
         Cell* cellTo = ocean->getCell(location.x + i, location.y + j);
         if (cellTo) {
-            neighbors.push_back(cellTo);
+            neighbours.push_back(cellTo);
         }
     }
-    //leftwards
     Cell* cellTo = ocean->getCell(location.x - 1, location.y);
     if (cellTo) {
-        neighbors.push_back(cellTo);
+        neighbours.push_back(cellTo);
     }
-    //rightwards
     cellTo = ocean->getCell(location.x + 1, location.y);
     if (cellTo) {
-        neighbors.push_back(cellTo);
+        neighbours.push_back(cellTo);
     }
-    return neighbors;
+    return neighbours;
 } 

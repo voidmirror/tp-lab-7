@@ -9,13 +9,12 @@ class Prey :
         public LivingObject
 {
 protected:
-    int daysBeforeBreeding = 5;
-    bool checkCell(Cell* cell);
+    int timeToReproduction = 4;
+    bool checkCell(Cell* cell) override;
 public:
-    Prey(int x, int y, Ocean* ocean);
-    Prey(coord Coordinates, Ocean* ocean);
-    void live();
-    void eat(Cell* cell);
-    void multiply();
-    std::string getName();
+    Prey(Coordinates Coordinates, Ocean* ocean);
+    void live() override;
+    void eat(Cell* cell) override;
+    void reproduct() override;
+    std::string getName() override;
 };

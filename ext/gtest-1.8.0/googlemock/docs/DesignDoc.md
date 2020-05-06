@@ -135,7 +135,7 @@ used to instantiate an action.
 
 Note that you don't need to provide the type of the parameter either.
 Suppose the parameter is named `param`, you can also use the
-Google-Mock-defined symbol `param_type` to refer to the type of the
+Google-Mock-defined character `param_type` to refer to the type of the
 parameter as inferred by the compiler.
 
 We will also provide `ACTION_P2`, `ACTION_P3`, and etc to support

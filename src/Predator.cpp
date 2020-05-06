@@ -2,43 +2,33 @@
 #include "Cell.h"
 #include "Ocean.h"
 
-#define PREDATOR '~'
 
-
-Predator::Predator(int x, int y, Ocean* ocean) : LivingObject(x, y, ocean) {
-    symbol = PREDATOR;
-}
-
-Predator::Predator(coord coordinates, Ocean* ocean) : LivingObject(coordinates, ocean) {
-    symbol = PREDATOR;
+Predator::Predator(Coordinates coordinates, Ocean* ocean) : LivingObject(coordinates, ocean) {
+    character = '~';
 }
 
 void Predator::eat(Cell* cell){
-    LivingObject* prey = (LivingObject*)(cell->getObject());
+    auto prey = (LivingObject*)(cell->getObject());
     prey->die();
-    coord* coordCellTo = cell->getLocation();
+    Coordinates* coordCellTo = cell->getLocation();
     move(coordCellTo->x, coordCellTo->y);
     energy += 30;
 }
 
-void Predator::multiply(){
+void Predator::reproduct(){
     std::vector<Cell*> forBaby = getNeighbouredCells();
 
     for (int i = forBaby.size() - 1; i >= 0; i--) {
-        if (forBaby[i]->isEmpty() == false) {
+        if (!forBaby[i]->isEmpty()) {
             forBaby.erase(forBaby.begin() + i);
         }
     }
     if (forBaby.size() != 0) {
         int index = rand() % forBaby.size();
-        Predator* littlePredator = new Predator(*forBaby[index]->getLocation(), ocean);
+        auto littlePredator = new Predator(*forBaby[index]->getLocation(), ocean);
         littlePredator->birth();
         energy -= 100;
     }
-}
-
-std::string Predator::getName() {
-    return "Predator";
 }
 
 Cell* Predator::findFood() {
@@ -76,7 +66,7 @@ void Predator::live() {
     }
     energy -= 10;
     if (energy >= 190) {
-        multiply();
+        reproduct();
     }
     if (energy <= 0) {
         die();
@@ -85,4 +75,8 @@ void Predator::live() {
 
 bool Predator::checkCell(Cell* cell) {
     return cell->isEmpty();
+}
+
+std::string Predator::getName() {
+    return "Predator";
 }

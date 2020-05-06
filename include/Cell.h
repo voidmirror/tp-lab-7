@@ -5,17 +5,16 @@
 class Cell {
 
     Object* object;
-    coord location;
-    static const char symbol = ' ';
+    Coordinates location;
+    static const char character = ' ';
 
 public:
     Cell();
-    Cell(coord location);
-    void setObject(Object* object);
-    Object* getObject();
+    explicit Cell(Coordinates location);
     bool isEmpty();
-    void printSymbol();
-    char getSymbol();
-    coord* getLocation();
-    void setLocation(coord location);
+    void printView();
+    Coordinates* getLocation();
+    void setLocation(Coordinates location);
+    Object* getObject();
+    void setObject(Object* object);
 };

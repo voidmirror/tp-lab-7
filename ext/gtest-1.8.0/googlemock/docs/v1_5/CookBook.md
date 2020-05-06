@@ -2220,7 +2220,7 @@ class MockFoo : public Foo {
 };
 ```
 
-(If the name `Die()` clashes with an existing symbol, choose another
+(If the name `Die()` clashes with an existing character, choose another
 name.) Now, we have translated the problem of testing when a `MockFoo`
 object dies to testing when its `Die()` method is called:
 
@@ -2898,7 +2898,7 @@ used to instantiate an action.
 
 Note that you don't need to provide the type of the parameter either.
 Suppose the parameter is named `param`, you can also use the
-Google-Mock-defined symbol `param_type` to refer to the type of the
+Google-Mock-defined character `param_type` to refer to the type of the
 parameter as inferred by the compiler.  For example, in the body of
 `ACTION_P(Add, n)` above, you can write `n_type` for the type of `n`.
 

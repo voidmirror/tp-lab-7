@@ -4,7 +4,7 @@
 
 class Ocean;
 
-struct coord {
+struct Coordinates {
     int x;
     int y;
 };
@@ -13,14 +13,14 @@ class Object {
 
 protected:
     Ocean* ocean;
-    coord location;
-    char symbol;
+    Coordinates location;
+    char character;
 
     Object(int x, int y, Ocean* ocean);
-    Object(coord coordinates, Ocean* ocean);
+    Object(Coordinates coordinates, Ocean* ocean);
 
 
 public:
-    char getSymbol();
+    char getCharacter();
     virtual std::string getName() = 0;
 };

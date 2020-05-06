@@ -8,14 +8,13 @@ class Predator :
 {
     int energy = 100;
 public:
-    Predator(int x, int y, Ocean* ocean);
-    Predator(coord Coordinates, Ocean* ocean);
-    void eat(Cell* cell);
-    void multiply();
-    std::string getName();
+    Predator(Coordinates Coordinates, Ocean* ocean);
+    void eat(Cell* cell) override;
+    void reproduct() override;
+    std::string getName() override;
     Cell* findFood();
-    bool isFood(Cell* cell);
+    static bool isFood(Cell* cell);
 
-    void live();
-    bool checkCell(Cell* cell);
+    void live() override;
+    bool checkCell(Cell* cell) override;
 };

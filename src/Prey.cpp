@@ -4,46 +4,41 @@
 #include <cstdlib>
 
 
-#define PREY '+'
-
-Prey::Prey(int x, int y, Ocean* ocean) : LivingObject(x, y, ocean) {
-    symbol = PREY;
+Prey::Prey(Coordinates coordinates, Ocean *ocean) : LivingObject(coordinates, ocean) {
+    character = '+';
 }
 
-Prey::Prey(coord coordinates, Ocean* ocean): LivingObject(coordinates, ocean) {
-    symbol = PREY;
-}
-
-void Prey::live(){
+void Prey::live() {
     motion();
-    multiply();
+    reproduct();
 }
 
-bool Prey::checkCell(Cell* cell) {
+bool Prey::checkCell(Cell *cell) {
     return cell->isEmpty();
 }
 
-void Prey::eat(Cell* cell){}
+void Prey::eat(Cell *cell) {}
 
-void Prey::multiply() {
-    if (daysBeforeBreeding == 0) {
-        std::vector<Cell*> forBaby = getNeighbouredCells();
+void Prey::reproduct() {
+    if (timeToReproduction == 0) {
+        std::vector<Cell *> places = getNeighbouredCells();
 
-        for(int i = forBaby.size()-1; i >= 0; i--){
-            if (forBaby[i]->isEmpty() == false) {
-                forBaby.erase(forBaby.begin() + i);
+        for (int i = places.size() - 1; i >= 0; i--) {
+            if (!places[i]->isEmpty()) {
+                places.erase(places.begin() + i);
             }
         }
-        if (forBaby.size() != 0) {
-            int index = rand() % forBaby.size();
-            Prey* littlePrey = new Prey(*forBaby[index]->getLocation(), ocean);
+        if (places.size() != 0) {
+            int index = rand() % places.size();
+            Prey *littlePrey = new Prey(*places[index]->getLocation(), ocean);
             littlePrey->birth();
         }
-        daysBeforeBreeding = 5;
-    }
-    else {
-        daysBeforeBreeding--;
+        timeToReproduction = 5;
+    } else {
+        timeToReproduction--;
     }
 }
 
-std::string Prey::getName() { return "Prey"; } 
+std::string Prey::getName() {
+    return "Prey";
+}

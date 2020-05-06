@@ -5,7 +5,6 @@
 #include "Predator.h"
 #include <ctime>
 #include <cstdlib>
-#include <Windows.h>
 #include <iostream>
 
 Ocean::Ocean() : Ocean(5,5){}
@@ -17,69 +16,39 @@ Ocean::Ocean(int width, int height){
     for (int i = 0; i < height; i++){
         cells[i] = new Cell[width];
         for (int j = 0; j < width; j++) {
-            cells[i][j].setLocation(coord{ j, i });
+            cells[i][j].setLocation(Coordinates{j, i});
             emptyCells.push_back(cells[i][j].getLocation());
         }
     }
 }
 
 void Ocean::createObjects() {
-    srand(time(0));
+    srand(time(nullptr));
 
     for (int i = 0; i < (int)(width*height*0.3); i++) {
-        coord* coordCell = generateCoord();
-        Stone* stone = new Stone(*coordCell, this);
+        Coordinates* coordCell = createCoordinates();
+        auto stone = new Stone(*coordCell, this);
         cells[coordCell->y][coordCell->x].setObject(stone);
     }
 
     for (int i = 0; i < (int)(width * height * 0.2); i++) {
-        coord* coordCell = generateCoord();
+        Coordinates* coordCell = createCoordinates();
         Prey* prey = new Prey(*coordCell, this);
         prey->birth();
     }
 
     for (int i = 0; i < (int)(width * height * 0.1); i++) {
-        coord* coordCell = generateCoord();
-        Predator* predator = new Predator(*coordCell, this);
+        Coordinates* coordCell = createCoordinates();
+        auto predator = new Predator(*coordCell, this);
         predator->birth();
     }
 }
 
-coord* Ocean::generateCoord() {
-    srand(time(0));
+Coordinates* Ocean::createCoordinates() {
+    srand(time(nullptr));
     int index = rand() % emptyCells.size();
-    coord* coordCell = emptyCells[index];
     emptyCells.erase(emptyCells.begin() + index);
-    return coordCell;
-}
-
-void Ocean::print() {
-    system("cls");
-    for(int i = 0; i < height; i++){
-        for(int j = 0; j < width; j++){
-            cells[i][j].printSymbol();
-        }
-        std::cout << "\n";
-    }
-    std::cout << "\n\n";
-}
-
-void Ocean::mainloop() {
-    for (int i = 0; i < 20; i++) {
-        update();
-        print();
-        Sleep(500);
-    }
-}
-
-void Ocean::update() {
-    std::vector<LivingObject*> copyLivingObjects(livingObjects);
-
-    for (int i = 0; i < copyLivingObjects.size(); i++) {
-        if (isExist(i, copyLivingObjects[i])) {
-            copyLivingObjects[i]->live();
-        }
-    }
+    return emptyCells[index];
 }
 
 Cell* Ocean::getCell(int x, int y) {
@@ -89,7 +58,7 @@ Cell* Ocean::getCell(int x, int y) {
     return nullptr;
 }
 
-Cell* Ocean::getCell(coord* coordinates) {
+Cell* Ocean::getCell(Coordinates* coordinates) {
     return getCell(coordinates->x, coordinates->y);
 }
 
@@ -108,7 +77,7 @@ void Ocean::deleteObject(LivingObject* object) {
 
 bool Ocean::isExist(int index, LivingObject* object) {
     if (index < livingObjects.size() - 1) {
-        index = livingObjects.size() - 1;
+        index = (int)livingObjects.size() - 1;
     }
     for (int i = 0; i <= index; i++) {
         if (livingObjects[i] == object) {
