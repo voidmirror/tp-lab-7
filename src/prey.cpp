@@ -5,7 +5,7 @@ Prey::Prey(Cell* c) : Object(c)
 {
 	this->life = life_span_prey;
 	species = ObjType::PREY;
-	spawnFrequency = spawn_freq_prey;
+	this->spawnFrequency = spawn_freq_prey;
 	symb = PREY_N;
 }
 

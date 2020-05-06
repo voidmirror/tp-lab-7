@@ -5,7 +5,7 @@ Predator::Predator(Cell* c) : Prey(c)
 {
 	this->life = life_span_predator;
 	species = ObjType::PREDATOR;
-	spawnFrequency = spawn_freq_predator;
+	this->spawnFrequency = spawn_freq_predator;
 	symb = PREDATOR_N;
 	hungry = false;
 	this->hungry_period = without_eat;
