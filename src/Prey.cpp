@@ -50,7 +50,7 @@ void Prey::divide(){
 }
 
 void Prey::move(){
-	/*switch (rand() % 4){
+	switch (rand() % 4){
 	case LEFT:
 		if (step(LEFT, this)) break;
 		break;
@@ -63,7 +63,7 @@ void Prey::move(){
 	case DOWN:
 		if (step(DOWN, this)) break;
 		break;
-	}*/
+	}
 }
 
 void Prey::live(){
