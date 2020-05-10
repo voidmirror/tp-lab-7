@@ -8,10 +8,9 @@
 #include "common.h"
 //#include "cell.h"
 
-#define STONE_N '#'
-#define CORAL_H '*'
-#define PREY_N 'f'
-#define PREDATOR_N 'S'
+#define STONE_SYMB '#'
+#define PREY_SYMB 'f'
+#define PREDATOR_SYMB 'S'
 
 enum class ObjType {STONE, PREY, PREDATOR, NONE};
 

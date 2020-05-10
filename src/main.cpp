@@ -6,9 +6,9 @@
 int main()
 {
     Ocean* ocean = new Ocean();
-    ocean->addObjects(ObjType::PREDATOR, 10);
-    ocean->addObjects(ObjType::PREY, 6);
-    ocean->addObjects(ObjType::STONE, 20);
+    ocean->addObjects(ObjType::PREDATOR, 20);
+    ocean->addObjects(ObjType::PREY, 100);
+    ocean->addObjects(ObjType::STONE, 50);
     ocean->run(20);
 
 }

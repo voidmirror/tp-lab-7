@@ -29,7 +29,7 @@ public:
     void addObjects(ObjType type, int amount);
     void print();
     void run(size_t numberOfIterations);
-    Cell* getCell(coord_t x, coord_t y);
+    Cell* getCell(int x, int y);
     bool deleteObject(Cell* cell);
     Cell* getEmptyCellByName(Pair coord);
     Cell* getCellByName(Pair coord, ObjType type);

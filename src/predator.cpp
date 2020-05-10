@@ -44,7 +44,7 @@ Predator::Predator(Cell * cell): Prey(cell){
     hungerTimer = predatorHungerlevel;
     reproductionTimer = predatorReproducetime;
     lifeTimer = predatorLifetime;
-    symb = 'S';
+    symb = PREDATOR_SYMB;
 }
 
 

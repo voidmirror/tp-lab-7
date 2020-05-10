@@ -11,10 +11,10 @@ using namespace std;
 
 
 
-typedef size_t coord_t;
 
-const size_t N = 30;
-const size_t M = 60;
+
+const int N = 30;
+const int M = 60;
 
 //const int stones = 10;
 //const int preys = 10;
@@ -29,8 +29,8 @@ const int predatorHungerlevel = 4;
 //const int speed = 10;
 
 struct Pair {
-    coord_t x; // 0...M-1
-    coord_t y; // 0...N-1
+    int x; // 0...M-1
+    int y; // 0...N-1
 };
 
 

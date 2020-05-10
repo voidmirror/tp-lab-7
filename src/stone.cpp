@@ -5,7 +5,7 @@
 
 Stone::Stone(Cell* c) :Object(c){
     type = ObjType::STONE;
-    symb = STONE_N;
+    symb = STONE_SYMB;
 }
 
 void Stone::live(){

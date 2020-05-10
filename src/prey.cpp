@@ -11,7 +11,7 @@
 
 Prey::Prey(Cell* c) : Object(c){
     type = ObjType::PREY;
-    symb = PREY_N;
+    symb = PREY_SYMB;
     lifeTimer = preyLifetime;
     reproductionTimer = preyReproducetime;
 

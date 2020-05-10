@@ -17,8 +17,8 @@ protected:
     size_t lifeTimer;
     size_t reproductionTimer;
     bool hunt();
-    void reproduce();
-    void move();
+    void reproduce() override ;
+    void move() override;
 public:
     Predator(Cell* cell);
     void live()override;

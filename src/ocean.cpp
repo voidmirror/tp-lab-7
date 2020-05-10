@@ -14,10 +14,10 @@ using namespace std;
 Ocean::Ocean()
 {
     cells.resize(N);
-    for (size_t x = 0; x < N; x++)
+    for (int x = 0; x < N; x++)
     {
         cells[x].resize(M);
-        for (size_t y = 0; y < M; y++)
+        for (int y = 0; y < M; y++)
             cells[x][y].init({ x, y }, this);
     }
     sizeOfOcean = {N, M};
@@ -144,7 +144,7 @@ void Ocean::print() {
 }
 
 
-Cell* Ocean::getCell(coord_t x, coord_t y){
+Cell* Ocean::getCell(int x, int y){
     return &cells[x][y];
 };
 
