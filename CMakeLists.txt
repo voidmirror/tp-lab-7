@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
 # Make PROJECT_SOURCE_DIR, PROJECT_BINARY_DIR, and PROJECT_NAME available.
-set(PROJECT_NAME task1) 
+set(PROJECT_NAME ocean) 
 project(${PROJECT_NAME})
 
 set(CMAKE_CXX_FLAGS "-g -Wall")
@@ -18,24 +18,16 @@ include_directories(${COMMON_INCLUDES})
 file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
 
 
-set(SRC_FILES ${PROJECT_SOURCE_DIR}/src/ocean.cpp
-              ${PROJECT_SOURCE_DIR}/src/stone.cpp
-              ${PROJECT_SOURCE_DIR}/src/prey.cpp
-              ${PROJECT_SOURCE_DIR}/src/predator.cpp)
+set(CMAKE_CXX_STANDARD 17)
 
-set(CMAKE_CXX_STANDARD 11)
-
-add_library(task1_lib ${SRC_FILES})
-add_executable(task1 ${PROJECT_SOURCE_DIR}/src/main.cpp)
-
-target_link_libraries(task1 task1_lib)
+add_executable(demo ${PROJECT_SOURCE_DIR}/src/demo.cpp ${PROJECT_SOURCE_DIR}/include/ocean.h ${PROJECT_SOURCE_DIR}/include/object.h)
 
 ################################
 # Testing
 ################################
 
 # Options. Turn on with 'cmake -Dmyvarname=ON'.
-option(BUILD_TESTS "Build all tests." OFF) # Makes boolean 'test' available.
+option(BUILD_TESTS "Build all tests." ON) # Makes boolean 'test' available.
 
 if (BUILD_TESTS)
   # This adds another subdirectory, which has 'project(gtest)'.
@@ -54,9 +46,6 @@ if (BUILD_TESTS)
 
   # Standard linking to gtest stuff.
   target_link_libraries(runUnitTests gtest gtest_main)
-
-  # Extra linking for the project.
-  target_link_libraries(runUnitTests task1_lib)
 
   # This is so you can do 'make test' to see all your tests run, instead of
   # manually running the executable runUnitTests to see those specific tests.
