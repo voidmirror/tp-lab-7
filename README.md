@@ -106,10 +106,10 @@ public:
 
 #include "common.h"
 
-#define STONE_N '#'
-#define CORAL_N '*'
-#define PREY_N 'f'
-#define PREDATOR_N 'S'
+#define STONE_SYMBOL '#'
+#define CORAL_SYMBOL '*'
+#define PREY_SYMBOL 'f'
+#define PREDATOR_SYMBOL 'S'
 
 enum class ObjType {STONE,CORAL,PREY,PREDATOR};
 
