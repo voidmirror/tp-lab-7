@@ -212,7 +212,7 @@ if test "x$acx_pthread_ok" = xyes; then
         AC_MSG_RESULT($attr_name)
         if test "$attr_name" != PTHREAD_CREATE_JOINABLE; then
             AC_DEFINE_UNQUOTED(PTHREAD_CREATE_JOINABLE, $attr_name,
-                               [Define to necessary symbol if this constant
+                               [Define to necessary character if this constant
                                 uses a non-standard name on your system.])
         fi
 
@@ -250,7 +250,7 @@ if test "x$acx_pthread_ok" = xyes; then
 	
 	# Try with the flags determined by the earlier checks.
 	#
-	# -Wl,-z,defs forces link-time symbol resolution, so that the
+	# -Wl,-z,defs forces link-time character resolution, so that the
 	# linking checks with -shared actually have any value
 	#
 	# FIXME: -fPIC is required for -shared on many architectures,
