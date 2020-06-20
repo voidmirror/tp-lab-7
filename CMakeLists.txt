@@ -21,7 +21,10 @@ file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
 set(SRC_FILES ${PROJECT_SOURCE_DIR}/src/Ocean.cpp
               ${PROJECT_SOURCE_DIR}/src/Stone.cpp
               ${PROJECT_SOURCE_DIR}/src/Prey.cpp
-              ${PROJECT_SOURCE_DIR}/src/Predator.cpp)
+              ${PROJECT_SOURCE_DIR}/src/Predator.cpp
+			  ${PROJECT_SOURCE_DIR}/src/Object.cpp
+			  ${PROJECT_SOURCE_DIR}/src/Cell.cpp
+			  ${PROJECT_SOURCE_DIR}/src/main.cpp)
 
 set(CMAKE_CXX_STANDARD 11)
 
