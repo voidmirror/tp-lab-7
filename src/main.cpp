@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
-#include <dos.h>
 //#include <windows.h>
 #include "Common.h"
 #include "Ocean.h"
