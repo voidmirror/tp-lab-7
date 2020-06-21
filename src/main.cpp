@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <dos.h>
-#include <windows.h>
+//#include <windows.h>
 #include "Common.h"
 #include "Ocean.h"
 #include "Cell.h"

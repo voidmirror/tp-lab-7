@@ -1,6 +1,6 @@
 #include <iostream>
 #include <time.h>
-#include "windows.h"
+//#include "windows.h"
 #include "Ocean.h"
 #include "Cell.h"
 #include "Stone.h"
@@ -137,6 +137,6 @@ void Ocean::run() {
 		}
 		system("CLS");
 		print();
-		Sleep(100);
+		//Sleep(100);
 	}
 }
