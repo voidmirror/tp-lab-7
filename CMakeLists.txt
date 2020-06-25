@@ -18,8 +18,7 @@ include_directories(${COMMON_INCLUDES})
 file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
 
 
-set(SRC_FILES ${PROJECT_SOURCE_DIR}/src/Ocean.cpp
-              ${PROJECT_SOURCE_DIR}/src/Object.cpp
+set(SRC_FILES ${PROJECT_SOURCE_DIR}/src/Object.cpp
               ${PROJECT_SOURCE_DIR}/src/Cell.cpp)
 
 set(CMAKE_CXX_STANDARD 11)
