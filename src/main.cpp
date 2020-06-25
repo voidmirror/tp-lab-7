@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
-#include <Windows.h>
+//#include <Windows.h>
 #include "Cell.h"
 
 using namespace std;
