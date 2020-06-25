@@ -39,42 +39,45 @@ int main() {
 
 
 
-	int counter_prey = 1;
-	while (counter_prey > 0) {
-		counter_prey = 0;
-		//system("cls");
-		for (int i = 1; i < n - 1; i++) {
-			for (int j = 1; j < n - 1; j++) {
-				field[i][j]->release_cell_objects(&field, i, j);
-			}
-		}
-		for (int i = 1; i < n - 1; i++) {
-			for (int j = 1; j < n - 1; j++) {
-				field[i][j]->to_the_future();
-				field[i][j]->add_void_cell();
-				field[i][j]->print_cell();
-			}
-			cout << endl;
-		}
+	//int counter_prey = 1;
+	//while (counter_prey > 0) {
+	//	counter_prey = 0;
+	//	//system("cls");
+	//	for (int i = 1; i < n - 1; i++) {
+	//		for (int j = 1; j < n - 1; j++) {
+	//			field[i][j]->release_cell_objects(&field, i, j);
+	//		}
+	//	}
+	//	for (int i = 1; i < n - 1; i++) {
+	//		for (int j = 1; j < n - 1; j++) {
+	//			field[i][j]->to_the_future();
+	//			field[i][j]->add_void_cell();
+	//			field[i][j]->print_cell();
+	//		}
+	//		cout << endl;
+	//	}
 
-		for (int i = 1; i < n - 1; i++) {
-			for (int j = 1; j < n - 1; j++) {
-				for (int k = 0; k < field[i][j]->get_objects().size(); k++) {
-					if (field[i][j]->get_objects()[i]->get_state() == 2) {
-						counter_prey++;
-					}
-				}
-				/*if ([&](){
-					int tmp = 0;
-					for (int k = 0; k < field[i][j]->get_objects().size(); k++) {
-						if (true) {
-							return true;
-						}
-					}
-				})*/
-			}
-		}
-	}
+	//	for (int i = 1; i < n - 1; i++) {
+	//		for (int j = 1; j < n - 1; j++) {
+	//			for (int k = 0; k < field[i][j]->get_objects().size(); k++) {
+	//				if (field[i][j]->get_objects()[i]->get_state() == 2) {
+	//					counter_prey++;
+	//				}
+	//			}
+	//			/*if ([&](){
+	//				int tmp = 0;
+	//				for (int k = 0; k < field[i][j]->get_objects().size(); k++) {
+	//					if (true) {
+	//						return true;
+	//					}
+	//				}
+	//			})*/
+	//		}
+	//	}
+	//}
+
+
+
 
 	cout << "The End of Game Ocean" << endl;
 /*
