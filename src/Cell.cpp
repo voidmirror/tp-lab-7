@@ -25,12 +25,12 @@ void Cell::sort_objects() {
 
 int Cell::num_of_objects(int state) {
 	int obj = 0;
-	for each (Object* var in objects)
+	/*for each (Object* var in objects)
 	{
 		if ((*var).get_state() == state) {
 			obj++;
 		}
-	}
+	}*/
 	return obj;
 }
 
